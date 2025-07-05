@@ -1,9 +1,21 @@
-
+/* ================================
+   ESTILOS GENERALES
+================================= */
 body {
     margin: 0;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
+main {
+    display: flex;
+    justify-content: center;
+    padding: 30px;
+}
+
+
+/* ================================
+   HEADER
+================================= */
 .header {
     display: flex;
     justify-content: space-between;
@@ -26,7 +38,7 @@ body {
 
 .logo-container h3 {
     margin: 0;
-    font-size: 20px;
+    font-size: 18px;
     color: #333;
 }
 
@@ -42,6 +54,97 @@ body {
     color: #444;
 }
 
+
+/* ================================
+   FORMULARIOS (LOGIN Y REGISTRO)
+================================= */
+.formulario-login {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 400px;
+    background-color: #fff;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 0 8px rgba(0,0,0,0.1);
+    margin-top: 30px;
+}
+
+.formulario-login.active {
+    display: flex;
+}
+
+.formulario-login h2 {
+    margin: 0 0 10px;
+    text-align: center;
+    color: #d15d10;
+}
+
+.formulario-login input,
+.formulario-login button {
+    margin: 10px;
+    padding: 10px;
+    font-size: 16px;
+    width: 80%;
+    max-width: 300px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.formulario-login input {
+    border: 1px solid #ccc;
+}
+
+.formulario-login button {
+    background-color: #d15d10;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.formulario-login button:hover {
+    background-color: #a64609;
+}
+
+.formulario-login p {
+    font-size: 14px;
+    text-align: center;
+}
+
+
+/* ================================
+   SELECCIÓN DE ROL
+================================= */
+.opciones-rol {
+    text-align: center;
+    margin-top: 30px;
+}
+
+.opciones-rol form {
+    display: inline-block;
+    margin: 10px;
+}
+
+.opciones-rol button {
+    padding: 10px 20px;
+    background-color: #d15d10;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.opciones-rol button:hover {
+    background-color: #a64609;
+}
+
+
+/* ================================
+   RESPONSIVE
+================================= */
 @media screen and (max-width: 768px) {
     .header {
         flex-direction: column;
@@ -58,5 +161,8 @@ body {
         text-align: left;
         font-size: 14px;
     }
-    
+
+    .formulario-login {
+        padding: 20px;
+    }
 }
