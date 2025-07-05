@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Login</title>
+  <link rel="stylesheet" href="../css/styles.css" />
+</head>
+<body>
+  <header class="header">
+    <div class="logo-container">
+      <img src="../assets/logo.png" alt="Logo de autoservicio" />
+      <h3>Autoservicio</h3>
+    </div>
+    <div class="title-container">
+      <h1>Bienvenido</h1>
+    </div>
+  </header>
+
+  <main class="main-content">
+    <!-- Selector de tipo de usuario -->
+    <div class="selector">
+      <button onclick="mostrarFormulario('cliente')">Soy Cliente</button>
+      <button onclick="mostrarFormulario('admin')">Soy Administrador</button>
+    </div>
+
+    <!-- Formulario de cliente -->
+    <form id="form-cliente" class="formulario" style="display: none;" onsubmit="return continuarCliente(event)">
+      <h2>Ingresá tu nombre</h2>
+      <input type="text" name="nombre" placeholder="Tu nombre" required />
+      <button type="submit">Continuar</button>
+    </form>
+
+    <!-- Formulario de administrador -->
+    <form id="form-admin" class="formulario" style="display: none;" onsubmit="return ingresarAdmin(event)">
+      <h2>Login Administrador</h2>
+      <input type="text" name="usuario" placeholder="Usuario" required />
+      <input type="password" name="password" placeholder="Contraseña" required />
+      <button type="submit">Ingresar</button>
+    </form>
+  </main>
+
+  <script>
+    function mostrarFormulario(tipo) {
+      document.getElementById('form-cliente').style.display = tipo === 'cliente' ? 'block' : 'none';
+      document.getElementById('form-admin').style.display = tipo === 'admin' ? 'block' : 'none';
+    }
+
+    function continuarCliente(event) {
+      event.preventDefault();
+      const nombre = event.target.nombre.value;
+      alert('Bienvenido, ' + nombre);
+      // Aquí podrías redirigir a la pantalla de productos u home
+      return false;
+    }
+
+    function ingresarAdmin(event) {
+      event.preventDefault();
+      const usuario = event.target.usuario.value;
+      const password = event.target.password.value;
+      // Validación básica
+      if (usuario === "admin" && password === "1234") {
+        alert("Login exitoso como administrador");
+        // Redirigir al panel admin
+      } else {
+        alert("Usuario o contraseña incorrectos");
+      }
+      return false;
+    }
+  </script>
+</body>
+</html>
