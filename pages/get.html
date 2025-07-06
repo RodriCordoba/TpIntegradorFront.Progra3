@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Parcial I - Autoservicio</title>
+    <title>Parcial II - Autoservicio</title>
     <link rel="stylesheet" href="../css/styles.css" />
 </head>
 <body>
@@ -21,25 +21,101 @@
       <h2>Rodrigo Córdoba<br />Iara Zoe Cruz</h2>
     </div>
   </header>
-  <nav>
-  <ul id="listado-nav">
-    <a href="indexAdmin.html">
-      <li class="links-header"><span>GET</span></li>
-    </a>
-    <a href="get.html">
-      <li class="links-header"><span>Get : id</span></li>
-    </a>
-    <a href="post.html">
-      <li class="links-header"><span>POST</span></li>
-    </a>
-    <a href="put.html">
-      <li class="links-header"><span>PUT</span></li>
-    </a>
-    <a href="delete.html">
-      <li class="links-header"><span>DELETE</span></li>
-    </a>
-  </ul>
-</nav>
 
+  <header>
+    <ul id="listado-nav">
+      <a href="indexAdmin.html">
+        <li class="links-header"><span>GET</span></li>
+      </a>
+      <a href="get.html">
+        <li class="links-header"><span>Get : id</span></li>
+      </a>
+      <a href="post.html">
+        <li class="links-header"><span>POST</span></li>
+      </a>
+      <a href="put.html">
+        <li class="links-header"><span>PUT</span></li>
+      </a>
+      <a href="delete.html">
+        <li class="links-header"><span>DELETE</span></li>
+      </a>
+    </ul>
+
+    <hr>
+      <h1>Listado de productos</h1>
+    <hr>
+
+    <main id="contenedor-get">
+      <div id="productos-container" class="crudForm-container">
+        <h2>Consultar producto</h2>
+
+        <form id="getProduct-form">
+          <label for="idProd">Id producto</label>
+          <input type="number" name="idProd" id="idProd" required>
+
+          <input type="submit" value="Consultar producto">
+        </form>
+      </div>
+
+      <div id="getId-container">
+          <ul id="getId-list">
+          </ul>
+      </div>
+
+    </main>
+    <script>
+      let getProduct_form = document.getElementById("getProduct-form");
+      let getId_lista = document.getElementById("getId-list");
+
+      getProduct_form.addEventListener("submit", async (event) => {
+
+        event.preventDefault();
+
+        try {
+          getId_lista.innerHTML = "<p>Cargando usuario...</p>";
+          let formData = new FormData(event.target); 
+
+          let data = Object.fromEntries(formData.entries());
+          console.log(data);
+
+          let idProd = data.idProd.trim(); 
+          console.log(idProd);
+
+          if(!idProd) {
+              throw new Error(`Error en el envio de datos del formulario`);
+          }
+
+          let response = await fetch(`http://localhost:3000/products/${idProd}`);
+
+          if(!response.ok) {
+              throw new Error(`Error ${response.status}: ${response.statusText}`); // Error 404: Not Found
+          }
+
+          let datos = await response.json();
+          console.log(datos);
+
+          if(!datos.payload || datos.payload.length === 0) {
+              throw new Error("No se encontro el producto solicitado")
+          }
+
+          let producto = datos.payload[0];
+          console.log(producto); 
+
+          let htmlProducto = `
+              <li id="producto-encontrado" class="li-listados productos-listados">
+                  <img src="${producto.image}" alt="${producto.name}" class="img-listados">
+                  <p>Id: ${producto.id} / Nombre: ${producto.name} / <strong>Precio: ${producto.price}$</strong></p>
+              </li>
+          `;
+
+          getId_lista.innerHTML = htmlProducto;
+        } catch (error) {
+              console.error("Error al obtener el producto: ", error);
+
+              getId_lista.innerHTML = `<p>${error.message}</p>`
+          }
+      })
+    </script>
+  </header>
 </body>
 </html>

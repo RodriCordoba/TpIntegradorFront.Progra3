@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Parcial I - Autoservicio</title>
+    <title>Parcial II - Autoservicio</title>
     <link rel="stylesheet" href="../css/styles.css" />
 </head>
 <body>
@@ -20,26 +20,69 @@
     <div class="authors-container">
       <h2>Rodrigo Córdoba<br />Iara Zoe Cruz</h2>
     </div>
+    
   </header>
-  <nav>
-  <ul id="listado-nav">
-    <a href="indexAdmin.html">
-      <li class="links-header"><span>GET</span></li>
-    </a>
-    <a href="get.html">
-      <li class="links-header"><span>Get : id</span></li>
-    </a>
-    <a href="post.html">
-      <li class="links-header"><span>POST</span></li>
-    </a>
-    <a href="put.html">
-      <li class="links-header"><span>PUT</span></li>
-    </a>
-    <a href="delete.html">
-      <li class="links-header"><span>DELETE</span></li>
-    </a>
-  </ul>
-</nav>
+  <header>
+    <ul id="listado-nav">
+      <a href="indexAdmin.html">
+        <li class="links-header"><span>GET</span></li>
+      </a>
+      <a href="get.html">
+        <li class="links-header"><span>Get : id</span></li>
+      </a>
+      <a href="post.html">
+        <li class="links-header"><span>POST</span></li>
+      </a>
+      <a href="put.html">
+        <li class="links-header"><span>PUT</span></li>
+      </a>
+      <a href="delete.html">
+        <li class="links-header"><span>DELETE</span></li>
+      </a>
+    </ul>
+    <hr>
+    <h1>Listado de productos</h1>
+    <hr>
 
+    <main id="contenedor-get">
+      <div id="productos-container">
+          <ul id="productos-lista">
+          </ul>
+      </div>
+    </main>
+    <script>
+        async function ObtenerDatosProductos() {
+          try {
+            let respuesta = await fetch("http:localhost:3000/products")
+
+            let datos = await respuesta.json();
+
+            console.log(datos);
+            console.table(datos.payload);
+
+            mostrarProductos(datos);
+
+          } catch(error){
+            console.error("Error:", error);
+          }
+        }
+        function mostrarProductos(array) {
+          let listaProductos = array.payload; 
+          let productos_lista = document.getElementById("productos-lista");
+          let htmlProducto = "";
+
+          listaProductos.forEach(producto => {
+              htmlProducto += `
+                  <li class="li-listados productos-listados">
+                      <img src="${producto.image}" alt="${producto.name}" class="img-listados">
+                      <p>Id: ${producto.id} / Nombre: ${producto.name} / <strong>Precio: ${producto.price}$</strong></p>
+                  </li>
+              `;
+          });
+          productos_lista.innerHTML = htmlProducto;
+        }
+        ObtenerDatosProductos();
+    </script>
+  </header>
 </body>
 </html>
