@@ -8,6 +8,9 @@
   body {
     background-color: #f4f4f4;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    min-height: 100px;
+    display: flex;
+    flex-direction: column;
   }
   
   main {
@@ -331,6 +334,14 @@
   
   .opciones-rol button:hover {
     background-color: #a64609;
+  }
+
+  .contenedor-formularios {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 60vh;
+  flex-direction: column;
   }
   
   /* RESPONSIVE*/

@@ -15,7 +15,7 @@
     </div>
 
     <div class="title-container">
-      <h1>Login Administrador</h1>
+      <h1>Login</h1>
     </div>
 
     <div class="authors-container">
@@ -31,22 +31,21 @@
       <button type="button" onclick="document.getElementById('form-admin').classList.add('active'); this.closest('.opciones-rol').style.display='none'">Ingresar como Administrador</button>
     </form>
   </div>
+  <div class="contenedor-formularios">
+    <form id="form-cliente" class="formulario-login" action="index.html" method="get">
+      <h2>Bienvenido Cliente</h2>
+      <input type="text" name="nombre" placeholder="Tu nombre" required>
+      <button type="submit">Continuar</button>
+    </form>
 
- <form id="form-cliente" class="formulario-login" action="index.html" method="get">
-    <h2>Bienvenido Cliente</h2>
-    <input type="text" name="nombre" placeholder="Tu nombre" required>
-    <button type="submit">Continuar</button>
-  </form>
-
-
-  <main>
-  <form id="form-admin" class="formulario-login" action="index.html" method="get">
-    <h2>Ingresar al sistema</h2>
-    <input type="email" name="email" placeholder="Correo electrónico" required>
-    <input type="password" name="password" placeholder="Contraseña" required>
-    <button type="submit">Ingresar</button>
-    <p>¿No tenés una cuenta? <a href="registro.html">Registrarse</a></p>
-  </form>
+    <form id="form-admin" class="formulario-login" action="index.html" method="get">
+      <h2>Ingresar al sistema</h2>
+      <input type="email" name="email" placeholder="Correo electrónico" required>
+      <input type="password" name="password" placeholder="Contraseña" required>
+      <button type="submit">Ingresar</button>
+      <p>¿No tenés una cuenta? <a href="registro.html">Registrarse</a></p>
+    </form>
+  </div>
 </main>
 <script>
   document.getElementById("form-cliente").addEventListener("submit", function(event) {
