@@ -1,12 +1,80 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Parcial I - Autoservicio</title>
+  <link rel="stylesheet" href="../css/styles.css" />
 </head>
-<body>
-    <h1>Chau
-    </h1>
+<body class="pagina-index">
+
+
+  <header class="header">
+    <div class="logo-container">
+      <img src="../assets/logo.png" alt="Logo de autoservicio" />
+      <h3>Autoservicio</h3>
+    </div>
+
+    <div class="title-container">
+      <h1>Productos</h1>
+    </div>
+
+    <div class="authors-container">
+      <h2>Rodrigo Córdoba<br />Iara Zoe Cruz</h2>
+    </div>
+  </header>
+  <nav class="barra-navegacion">
+
+
+    <input
+      type="text"
+      id="inputbuscar"
+      placeholder="Buscar producto..."
+      class="barra-busqueda"
+    />
+
+
+    <div class="crud-botones">
+      <button id="btn-crear">Crear</button>
+      <button id="btn-leer">Leer</button>
+      <button id="btn-actualizar">Actualizar</button>
+      <button id="btn-eliminar">Eliminar</button>
+    </div>
+
+  </nav>
+
+
+  <main>
+
+
+    <section class="seccion-productos" id="seccion-productos">
+      <div class="titulo-con-botones">
+        <h2>Nuestros productos</h2>
+        <div class="ordenar-botones">
+          <button id="ordenar-nombre">Ordenar por nombre</button>
+          <button id="ordenar-precio">Ordenar por precio</button>
+        </div>
+      </div>
+
+      <div class="contenedor-productos" id="contenedor-productos"></div>
+    </section>
+
+ 
+    <section class="seccion-carrito">
+      <h2>Carrito</h2>
+
+      <ul id="items-carrito">
+        <p>No hay elementos en el carrito.</p>
+      </ul>
+
+      <div class="total-carrito">
+        <p>Total: <span id="precio-total">$0.00</span></p>
+      </div>
+
+      <button id="vaciar-carrito">Vaciar carrito</button>
+    </section>
+
+  </main>
+
 </body>
 </html>
