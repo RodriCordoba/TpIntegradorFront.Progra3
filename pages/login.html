@@ -24,11 +24,9 @@
   </header>
 
   <div class="opciones-rol">
-    <!-- Cliente -->
     <form>
       <button type="button" onclick="document.getElementById('form-cliente').classList.add('active'); this.closest('.opciones-rol').style.display='none'">Ingresar como Cliente</button>
     </form>
-    <!-- Admin -->
     <form>
       <button type="button" onclick="document.getElementById('form-admin').classList.add('active'); this.closest('.opciones-rol').style.display='none'">Ingresar como Administrador</button>
     </form>
@@ -51,13 +49,11 @@
   </form>
 </main>
 <script>
-  // CLIENTE: Redirige directo a index.html
   document.getElementById("form-cliente").addEventListener("submit", function(event) {
     event.preventDefault();
     window.location.href = "index.html";
   });
 
-  // ADMIN: Validación simple
   document.getElementById("form-admin").addEventListener("submit", function(event) {
     event.preventDefault();
     window.location.href = "indexAdmin.html";
