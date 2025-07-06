@@ -1,6 +1,4 @@
-/* ================================
-   ESTILOS GENERALES
-================================= */
+/* ESTILOS GENERALES */
 * {
     box-sizing: border-box;
     margin: 0;
@@ -18,9 +16,7 @@
     padding: 30px 20px;
   }
   
-  /* ================================
-     HEADER
-  ================================= */
+  /*HEADER */
   .header {
     display: flex;
     justify-content: space-between;
@@ -59,11 +55,9 @@
     color: #444;
   }
   
-  /* ================================
-     NAV / BARRA SUPERIOR
-  ================================= */
+  /* NAV / BARRA SUPERIOR */
   .barra-navegacion {
-    background-color: #28a745;
+    background-color: #d15d10;
     color: white;
     display: flex;
     flex-wrap: wrap;
@@ -78,35 +72,33 @@
     border: none;
     width: 250px;
   }
-  .crud-botones {
+  #listado-nav {
     display: flex;
     justify-content: center;
-    gap: 12px;
-    flex-wrap: wrap;
-    width: 100%;
-    margin-top: 15px;
+    gap: 15px;
+    list-style: none;
+    padding: 20px;
+    background-color: #333;
   }
-  
-  .crud-botones button {
-    padding: 8px 16px;
-    background-color: #ffa500;
+
+  .links-header {
+    padding: 10px 20px;
+    background-color: #555;
     color: white;
-    border: none;
     border-radius: 5px;
-    font-size: 0.95rem;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: background 0.3s ease;
   }
-  
-  .crud-botones button:hover {
-    background-color: #cc8400;
+
+  .links-header:hover {
+    background-color: #777;
   }
-  
-  
-  
-  /* ================================
-     SECCIÓN PRODUCTOS
-  ================================= */
+
+  a {
+    text-decoration: none;
+  }
+
+  /*SECCIÓN PRODUCTOS*/
   .seccion-productos {
     padding: 20px;
   }
@@ -128,14 +120,14 @@
     padding: 0.4rem 0.8rem;
     font-size: 0.9rem;
     cursor: pointer;
-    background-color: #28a745;
+    background-color: #d15d10;
     border: none;
     color: white;
     border-radius: 6px;
   }
   
   .ordenar-botones button:hover {
-    background-color: #218838;
+    background-color: #d15d10;
   }
   
   .contenedor-productos {
@@ -183,7 +175,7 @@
   }
   
   .tarjeta-producto button {
-    background-color: #28a745;
+    background-color: #d15d10;
     border: none;
     padding: 6px 12px;
     color: white;
@@ -193,12 +185,10 @@
   }
   
   .tarjeta-producto button:hover {
-    background-color: #218838;
+    background-color: #d15d10;
   }
   
-  /* ================================
-     SECCIÓN CARRITO
-  ================================= */
+  /*SECCIÓN CARRITO*/
   .seccion-carrito {
     background-color: #f8f9fa;
     border: none;
@@ -266,9 +256,7 @@
     font-size: 1rem;
   }
   
-  /* ================================
-     FORMULARIOS (LOGIN)
-  ================================= */
+  /* FORMULARIOS (LOGIN)*/
   .formulario-login {
     display: none;
     flex-direction: column;
@@ -320,9 +308,7 @@
     text-align: center;
   }
   
-  /* ================================
-     SELECCIÓN DE ROL
-  ================================= */
+  /* SELECCIÓN DE ROL*/
   .opciones-rol {
     text-align: center;
     margin-top: 30px;
@@ -347,20 +333,7 @@
     background-color: #a64609;
   }
   
-  /* ================================
-     VISIBILIDAD
-  ================================= */
-  .hidden {
-    display: none;
-  }
-  
-  .visible {
-    display: block;
-  }
-  
-  /* ================================
-     RESPONSIVE
-  ================================= */
+  /* RESPONSIVE*/
   @media screen and (max-width: 768px) {
     .header {
       flex-direction: column;
@@ -385,8 +358,5 @@
     .ordenar-botones {
       flex-direction: column;
       align-items: center;
-    }
-
-    
+    }    
   }
-  

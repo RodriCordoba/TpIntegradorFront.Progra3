@@ -50,6 +50,20 @@
     <p>¿No tenés una cuenta? <a href="registro.html">Registrarse</a></p>
   </form>
 </main>
+<script>
+  // CLIENTE: Redirige directo a index.html
+  document.getElementById("form-cliente").addEventListener("submit", function(event) {
+    event.preventDefault();
+    window.location.href = "index.html";
+  });
+
+  // ADMIN: Validación simple
+  document.getElementById("form-admin").addEventListener("submit", function(event) {
+    event.preventDefault();
+    window.location.href = "indexAdmin.html";
+  });
+</script>
+
 
 </body>
 </html>
