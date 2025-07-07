@@ -21,25 +21,191 @@
       <h2>Rodrigo Córdoba<br />Iara Zoe Cruz</h2>
     </div>
   </header>
-  <nav>
-  <ul id="listado-nav">
-    <a href="indexAdmin.html">
-      <li class="links-header"><span>GET</span></li>
-    </a>
-    <a href="get.html">
-      <li class="links-header"><span>Get : id</span></li>
-    </a>
-    <a href="post.html">
-      <li class="links-header"><span>POST</span></li>
-    </a>
-    <a href="put.html">
-      <li class="links-header"><span>PUT</span></li>
-    </a>
-    <a href="delete.html">
-      <li class="links-header"><span>DELETE</span></li>
-    </a>
-  </ul>
-</nav>
+  <header>
+    <ul id="listado-nav">
+      <a href="indexAdmin.html">
+        <li class="links-header"><span>GET</span></li>
+      </a>
+      <a href="get.html">
+        <li class="links-header"><span>Get : id</span></li>
+      </a>
+      <a href="post.html">
+        <li class="links-header"><span>POST</span></li>
+      </a>
+      <a href="put.html">
+        <li class="links-header"><span>PUT</span></li>
+      </a>
+      <a href="delete.html">
+        <li class="links-header"><span>DELETE</span></li>
+      </a>
+    </ul>
+    <hr>
+      <h1 class="titulo">Actualizar producto</h1>
+      <p class="titulo">Primero buscamos el id, luego generamos un formulario para actualizar los campos</p>
+    <hr>
+      <main id="contenedor-get">
 
+        <div id="getProduct-container" class="crudForm-container">
+          <h2>Consultar producto</h2>
+
+          <form id="getProduct-form">
+              <label for="idProd">Id producto</label>
+              <input type="number" name="idProd" id="idProd" required>
+
+              <input type="submit" value="Consultar producto">
+          </form>
+        </div>
+
+        <div id="getId-container">
+            <ul id="getId-list">
+            </ul>
+        </div>
+
+        <div id="updateForm-container"></div>
+      </main>
+
+      <script>
+        let getProduct_form = document.getElementById("getProduct-form");
+        let getId_lista = document.getElementById("getId-list");
+        let updateForm_container = document.getElementById("updateForm-container");
+
+        getProduct_form.addEventListener("submit", async (event) => {
+          event.preventDefault(); 
+          try {
+            getId_lista.innerHTML = "<p>Cargando usuario...</p>";
+
+            let formData = new FormData(event.target); 
+
+            let data = Object.fromEntries(formData.entries());
+            console.log(data);
+
+            let idProd = data.idProd.trim(); 
+            console.log(idProd);
+
+            if(!idProd) {
+              throw new Error(`Error en el envio de datos del formulario`);
+            }
+
+            let response = await fetch(`http://localhost:3000/products/${idProd}`);
+
+            if(!response.ok) {
+                throw new Error(`Error ${response.status}: ${response.statusText}`); 
+            }
+
+            let datos = await response.json();
+            console.log(datos);
+            if(!datos.payload || datos.payload.length === 0) {
+              throw new Error("No se encontro el producto solicitado")
+            }
+              
+            let producto = datos.payload[0];
+            console.log(producto); 
+            let htmlProducto = `
+                <li class="li-listados productos-listados">
+                    <div class="li-listados_datos">
+                        <p>Id: ${producto.id} / Nombre: ${producto.name} / <strong>Precio: $${producto.price}</strong></p>
+                        <img src="${producto.image}" alt="${producto.nombre}" class="img-listados">
+                    </div>
+                    <div class="li-listados_boton">
+                        <input class="listados_boton" id="updateProduct_button" type="button" value="Actualizar producto">
+                    </div>
+                </li>
+            `;
+
+            getId_lista.innerHTML = htmlProducto;
+
+            let updateProduct_button = document.getElementById("updateProduct_button");
+
+            updateProduct_button.addEventListener("click", function(event) {
+              formularioPutProducto(event, producto);
+            });
+
+          } catch (error) {
+              console.error("Error al obtener el producto: ", error);
+
+              getId_lista.innerHTML = `<p>${error.message}</p>`
+          }
+        });
+
+        function formularioPutProducto(event, producto) {
+          event.stopPropagation(); 
+          console.log(producto);
+
+          let updateProduct = `
+          <div id="updateProducts-container" class="crudForm-container">
+            <h2>Actualizar producto</h2>
+
+            <form id="updateProducts-form" autocomplete="off">
+              <label for="idProd">Id</label>
+              <input type="number" name="id" id="idProd" value=${producto.id} readonly>
+
+              <label for="categoryProd">Categoria</label>
+              <select name="category" id="categoryProd" required>
+                  <option value="ropa">ropa</option>
+                  <option value="perfumes">perfumes</option>
+              </select>
+
+              <label for="imagenProd">Imagen</label>
+              <input type="text" name="image" id="imagenProd" value=${producto.image} required>
+
+              <label for="nombreUser">Nombre</label>
+              <input type="text" name="name" id="nombreUser" value=${producto.name} required>
+
+              <label for="precioProd">Precio</label>
+              <input type="number" name="price" id="precioProd" value=${producto.price} required>
+
+              <input type="submit" value="Actualizar producto">
+            </form>
+          </div>
+          `;
+
+        updateForm_container.innerHTML = updateProduct;
+
+        let updateProducts_form = document.getElementById("updateProducts-form");
+
+        updateProducts_form.addEventListener("submit", function(event) {
+          actualizarProducto(event);
+        });
+      }
+
+      async function actualizarProducto(event) {
+        event.preventDefault(); 
+        let formData = new FormData(event.target);
+
+        let data = Object.fromEntries(formData.entries());
+        console.table(data);
+
+        if(!data.name || !data.image || !data.price) {
+            alert("Todos los campos son obligatorios");
+            return;
+        }
+        try {
+          let response = await fetch("http://localhost:3000/products", {
+            method: "PUT",
+            headers: {
+              "Content-type" : "application/json",
+            },
+            body: JSON.stringify(data)
+          });
+
+          if(response.ok) {
+            console.log(response);
+
+            let result = await response.json();
+            console.log(result.message);
+            alert(result.message);
+            getId_lista.innerHTML = "";
+            updateForm_container.innerHTML = "";
+          } else {
+            let error = await response.json();
+            console.log("Error", error.message)
+          }
+        } catch (error) {
+          console.log("Error al enviar los datos", error);
+          alert("Error al procesar la solicitud");
+      }
+    }
+  </script>
+</header>
 </body>
 </html>

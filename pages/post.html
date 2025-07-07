@@ -21,7 +21,7 @@
       <h2>Rodrigo Córdoba<br />Iara Zoe Cruz</h2>
     </div>
   </header>
-  <nav>
+  <header>
   <ul id="listado-nav">
     <a href="indexAdmin.html">
       <li class="links-header"><span>GET</span></li>
@@ -39,7 +39,77 @@
       <li class="links-header"><span>DELETE</span></li>
     </a>
   </ul>
-</nav>
+  <hr>
+    <h1>Crear productos</h1>
+  <hr>
+  <main id="contenedor-post">
+    <div id="altaProducts-container" class="crudForm-container">
+      <h2>Alta producto</h2>
 
+      <form id="altaProducts-form" autocomplete="off">
+
+        <label for="categoryProd">Categoria</label>
+          <select name="category" id="categoryProd" required>
+          <option value="ropa">ropa</option>
+          <option value="perfumes">perfumes</option>
+        </select>
+
+        <label for="imagenProd">Imagen</label>
+        <input type="text" name="image" id="imagenProd" required>
+
+        <label for="nombreUser">Nombre</label>
+        <input type="text" name="name" id="nombreUser" required>
+
+        <label for="precioProd">Precio</label>
+        <input type="number" name="price" id="precioProd" required>
+
+        
+        <input type="submit" value="Crear producto">
+      </form>
+    </div>
+  </main>
+  <script>
+    let altaProducts_form = document.getElementById("altaProducts-form");
+
+    altaProducts_form.addEventListener("submit", async(event) => {
+      event.preventDefault(); 
+
+      let formData = new FormData(event.target); 
+
+      let data = Object.fromEntries(formData.entries()); 
+      console.log(data); 
+      
+      if(!data.name || !data.image || !data.price) {
+          alert("Todos los campos son obligatorios!");
+          return;
+      }
+      try {
+        let response = await fetch("http://localhost:3000/products", {
+          method: "POST",
+          headers: {
+              "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data)
+        });
+
+        if(response.ok) {
+            console.log(response);
+
+            let result = await response.json();
+            console.log(result.message);
+            alert(result.message);
+
+        } else {
+            let error = await response.json();
+            console.log("Error:", error.message);
+        }
+
+      } catch {
+          console.log("Error al enviar los datos", error);
+          alert("Error al enviar la solicitud");
+      }
+    })
+  </script>
+</header>
 </body>
 </html>
