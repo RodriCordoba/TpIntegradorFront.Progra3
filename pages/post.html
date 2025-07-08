@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -69,6 +69,7 @@
     </div>
   </main>
   <script>
+    const url = "http://localhost:3000/api";
     let altaProducts_form = document.getElementById("altaProducts-form");
 
     altaProducts_form.addEventListener("submit", async(event) => {
@@ -84,7 +85,7 @@
           return;
       }
       try {
-        let response = await fetch("http://localhost:3000/products", {
+        let response = await fetch(`${url}/products`, {
           method: "POST",
           headers: {
               "Content-Type": "application/json",
@@ -112,4 +113,4 @@
   </script>
 </header>
 </body>
-</html>
+</html> -->

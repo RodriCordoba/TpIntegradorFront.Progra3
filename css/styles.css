@@ -371,32 +371,3 @@
       align-items: center;
     }    
   }
-
-  /* .titulo {
-    text-align: center;
-  }
-  #producto-encontrado {
-    border-top: 2px solid;
-    border-radius: 0px;
-  }
-  .li-listados_boton {
-    width: 25%;
-  }
-
-  .li-listados_datos p, .listados_boton {
-    margin: 0 !important;
-  }
-
-  .li-listados_datos {
-    display: flex;
-    justify-content: space-around;
-    width: 70%;
-    align-items: center;
-  }
-
-
-  #updateForm-container {
-    width: 50%;
-    margin: 0 auto;
-    margin-top: 60px;
-  } */
