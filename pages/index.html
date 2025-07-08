@@ -23,6 +23,8 @@
     <div class="authors-container">
       <h2>Rodrigo Córdoba<br />Iara Zoe Cruz</h2>
     </div>
+    <button id="btn-logout" class="boton-logout" style="display: none;">Cerrar sesión</button>
+
   </header>
 
   <nav class="barra-navegacion">
@@ -45,7 +47,6 @@
       </div>
 
       <div class="contenedor-productos" id="contenedor-productos">
-        <ul id="productos-lista"></ul>  
       </div>
     </section>
 
@@ -64,39 +65,6 @@
     </section>
 
   </main>
-  
-  <script>
-    const url = "http://localhost:3000/api";
-
-    async function ObtenerDatosProductos() {
-      try {
-        let respuesta = await fetch(`${url}/products`);
-        let datos = await respuesta.json();
-        mostrarProductos(datos);
-      } catch (error) {
-        console.error("Error:", error);
-      }
-    }
-
-    function mostrarProductos(array) {
-      let listaProductos = array.payload; 
-      let productos_lista = document.getElementById("productos-lista");
-      let htmlProducto = "";
-
-      listaProductos.forEach(producto => {
-        htmlProducto += `
-          <li class="li-listados productos-listados">
-            <img src="${producto.image}" alt="${producto.name}" class="img-listados">
-            <p>Id: ${producto.id} / Nombre: ${producto.name} / <strong>Precio: ${producto.price}$</strong></p>
-          </li>
-        `;
-      });
-
-      productos_lista.innerHTML = htmlProducto;
-    }
-
-    ObtenerDatosProductos();
-  </script>
-
+  <script defer src="../js/main.js"></script>
 </body>
 </html>
