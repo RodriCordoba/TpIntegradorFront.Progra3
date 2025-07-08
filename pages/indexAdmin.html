@@ -51,9 +51,11 @@
       </div>
     </main>
     <script>
+        const url = "http://localhost:3000/api";
+
         async function ObtenerDatosProductos() {
           try {
-            let respuesta = await fetch("http://localhost:3000/products");
+            let respuesta = await fetch(`${url}/products`);
 
             let datos = await respuesta.json();
 

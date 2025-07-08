@@ -61,6 +61,7 @@
     </div>
   </main>
   <script>
+    const url = "http://localhost:3000/api";
     let getProduct_form = document.getElementById("getProduct-form");
     let getId_lista = document.getElementById("getId-list");
 
@@ -82,7 +83,7 @@
           throw new Error(`Error en el envio de datos del formulario`);
         }
 
-        let response = await fetch(`http://localhost:3000/products/${idProd}`);
+        let response = await fetch(`${url}/products/${idProd}`);
 
         if(!response.ok) {
           throw new Error(`Error ${response.status}: ${response.statusText}`); 
